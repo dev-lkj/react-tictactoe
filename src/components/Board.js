@@ -1,30 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Square from './Square';
 import './Board.css';
 
-const Board = () => {
-
-    const [squares, setSquares] = useState(Array(9).fill(null));
-    const [xIsNext, setXIsNext] = useState(true);
-    const status =  `Next Player: ${xIsNext ? 'X' : 'O'}}`;
+const Board = ({squares, onClick}) => {
     
-    const handleClick = (i) => {
-        const newSqures = squares.slice();
-        newSqures[i] = xIsNext ? 'X' : 'O';
-        setSquares(newSqures);
-        // setXIsNext(!xIsNext); // true이면 false가 됨
-        setXIsNext(previousState => !previousState)
-    }
 
     const renderSquare = (i) => {
         return <Square value={ squares[i] } 
-        onClick={() => { handleClick(i)}} />
+        onClick={() => onClick(i)} />
     }
 
- 
+   
     return (
       <div>
-        <div className='status'>{status}</div>
         <div className='board-row'>
             {renderSquare(0)}
             {renderSquare(1)}
